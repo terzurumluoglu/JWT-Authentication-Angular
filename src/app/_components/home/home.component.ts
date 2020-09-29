@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Post } from 'src/app/_models';
+import { AuthenticationService, PostService } from 'src/app/_services';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  posts : Post[];
+  constructor(
+    private router : Router,
+    private _auth : AuthenticationService,
+    private _post : PostService
+  ) { }
 
   ngOnInit(): void {
+    this.getAllPosts();
+  }
+
+  async getAllPosts(){
+    this.posts = await this._post.getAllPosts();
+    console.log(this.posts);
+  }
+
+  logout(){
+    this._auth.logout();
+    this.router.navigate(['/login']);
   }
 
 }
