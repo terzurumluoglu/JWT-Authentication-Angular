@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './_components/login/login.component';
-import { HomeComponent } from './_components/home/home.component';
+import { HomeComponent,LoginComponent } from './_components';
 
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule,ReactiveFormsModule } from "@angular/forms";
