@@ -11,11 +11,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthenticationService {
 
   public userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
 
   constructor(private http: HttpClient) {
     this.userSubject = new BehaviorSubject<User>(null);
-    this.user = this.userSubject.asObservable();
   }
 
   public get userValue(): User {

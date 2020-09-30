@@ -24,7 +24,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                     .pipe(
                         catchError(error => {
                             if (error instanceof HttpErrorResponse && error.status === 401) {
-                                console.log('if');
                                 return this.handle401Error(request, next);
                             } else {
                                 return throwError(error);
@@ -50,7 +49,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                     console.log(user);
                     this.isRefreshing = false;
                     this.refreshTokenSubject.next(user.access_token);
-                    return next.handle(this.addToken(request, user.access_token));
+                    return next.handle(
+                        request.clone({
+                            setHeaders: {
+                                'Authorization': `Bearer ${user.access_token}`
+                            }
+                        })
+                    );
                 }));
 
         } else {
@@ -58,18 +63,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                 filter(token => token != null),
                 take(1),
                 switchMap(jwt => {
-                    console.log(jwt);
-                    return next.handle(this.addToken(request, jwt));
+                    return next.handle(
+                        request.clone({
+                            setHeaders: {
+                                'Authorization': `Bearer ${jwt}`
+                            }
+                        })
+                    );
                 }));
         }
-    }
-
-
-    private addToken(request: HttpRequest<any>, token: string) {
-        return request.clone({
-            setHeaders: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
     }
 }

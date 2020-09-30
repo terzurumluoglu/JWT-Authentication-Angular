@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/_models';
 import { AuthenticationService } from 'src/app/_services';
 
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   createForm(){
     this.loginForm = this.fb.group({
-      email : ['toprak@toprak.com',[Validators.required]],
+      email : ['test@test.com',[Validators.required]],
       password : ['123456',[Validators.required]]
     })
   }

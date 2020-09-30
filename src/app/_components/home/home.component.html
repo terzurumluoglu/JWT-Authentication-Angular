@@ -1,5 +1,18 @@
-<p>home works!</p>
+<br>
+<h2 style="cursor: pointer;" (click)="logout()">Logout</h2>
 
 <hr>
 
-<h2 style="cursor: pointer;" (click)="logout()">Logout</h2>
+<div class="row" style="padding-right: 10%;padding-left: 10%;">
+    <div class="col-4" style="margin-top: 10px;" *ngFor="let post of posts">
+        <div class="card" style="min-height: 280px; ">
+            <div class="card-header" [innerText]="[post?.title]"></div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                
+                    <footer class="blockquote-footer" [innerText]="[post?.body]"></footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
