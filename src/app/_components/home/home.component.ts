@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   async getAllPosts(){
     this.posts = await this._post.getAllPosts();
-    console.log(this.posts);
   }
 
   logout(){
