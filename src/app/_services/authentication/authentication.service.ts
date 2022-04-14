@@ -41,8 +41,6 @@ export class AuthenticationService {
       token : this.userValue.refresh_token
     };
 
-    console.log(body);
-
     return this.http.post<any>(url, body)
       .pipe(map((token) => {
         const user: User = {
@@ -59,7 +57,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    const url: string = `${environment.apiUrl}auth/token/${this.userValue.refresh_token}`;
+    const url: string = `${environment.apiUrl}auth/logout/${this.userValue.refresh_token}`;
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     }
