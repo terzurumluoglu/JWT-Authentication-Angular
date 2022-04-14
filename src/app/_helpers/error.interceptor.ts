@@ -18,7 +18,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(catchError(err => {
             if ([401, 403].includes(err.status) && this._auth.userValue) {
                 // auto logout if 401 or 403 response returned from api
-                console.log([401, 403]);
 
                 return next.handle(request)
                     .pipe(
@@ -46,7 +45,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             return this._auth.refreshToken().pipe(
                 switchMap((user: User) => {
-                    console.log(user);
                     this.isRefreshing = false;
                     this.refreshTokenSubject.next(user.access_token);
                     return next.handle(
